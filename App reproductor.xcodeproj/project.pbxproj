@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222D34FF27285EE3004CC6E8 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222D34FE27285EE3004CC6E8 /* SignInController.swift */; };
 		228225A8272445A500CBC3E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225A7272445A500CBC3E2 /* AppDelegate.swift */; };
 		228225AA272445A500CBC3E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225A9272445A500CBC3E2 /* SceneDelegate.swift */; };
 		228225AC272445A500CBC3E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225AB272445A500CBC3E2 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 		228225BF272445A600CBC3E2 /* App_reproductorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225BE272445A600CBC3E2 /* App_reproductorTests.swift */; };
 		228225C9272445A600CBC3E2 /* App_reproductorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225C8272445A600CBC3E2 /* App_reproductorUITests.swift */; };
 		228225CB272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225CA272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift */; };
+		22C7156E272D75CD0061A64D /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7156D272D75CD0061A64D /* WelcomeController.swift */; };
+		22C71573272D93950061A64D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C71572272D93950061A64D /* Model.swift */; };
+		22FE09502724670100FF7274 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FE094F2724670100FF7274 /* SignUpController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		228225A4272445A500CBC3E2 /* App reproductor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App reproductor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		222D34FE27285EE3004CC6E8 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		228225A4272445A500CBC3E2 /* Naranja Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Naranja Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		228225A7272445A500CBC3E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228225A9272445A500CBC3E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		228225AB272445A500CBC3E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		228225AE272445A500CBC3E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		228225B0272445A600CBC3E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		228225B0272445A600CBC3E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "App reproductor/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		228225B3272445A600CBC3E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228225B5272445A600CBC3E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228225BA272445A600CBC3E2 /* App reproductorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App reproductorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +54,9 @@
 		228225C4272445A600CBC3E2 /* App reproductorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App reproductorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		228225C8272445A600CBC3E2 /* App_reproductorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_reproductorUITests.swift; sourceTree = "<group>"; };
 		228225CA272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_reproductorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		22C7156D272D75CD0061A64D /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		22C71572272D93950061A64D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		22FE094F2724670100FF7274 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +97,7 @@
 		228225A5272445A500CBC3E2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				228225A4272445A500CBC3E2 /* App reproductor.app */,
+				228225A4272445A500CBC3E2 /* Naranja Music.app */,
 				228225BA272445A600CBC3E2 /* App reproductorTests.xctest */,
 				228225C4272445A600CBC3E2 /* App reproductorUITests.xctest */,
 			);
@@ -106,6 +114,10 @@
 				228225B0272445A600CBC3E2 /* Assets.xcassets */,
 				228225B2272445A600CBC3E2 /* LaunchScreen.storyboard */,
 				228225B5272445A600CBC3E2 /* Info.plist */,
+				22FE094F2724670100FF7274 /* SignUpController.swift */,
+				222D34FE27285EE3004CC6E8 /* SignInController.swift */,
+				22C7156D272D75CD0061A64D /* WelcomeController.swift */,
+				22C71572272D93950061A64D /* Model.swift */,
 			);
 			path = "App reproductor";
 			sourceTree = "<group>";
@@ -130,9 +142,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		228225A3272445A500CBC3E2 /* App reproductor */ = {
+		228225A3272445A500CBC3E2 /* Naranja Music */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 228225CE272445A600CBC3E2 /* Build configuration list for PBXNativeTarget "App reproductor" */;
+			buildConfigurationList = 228225CE272445A600CBC3E2 /* Build configuration list for PBXNativeTarget "Naranja Music" */;
 			buildPhases = (
 				228225A0272445A500CBC3E2 /* Sources */,
 				228225A1272445A500CBC3E2 /* Frameworks */,
@@ -142,9 +154,9 @@
 			);
 			dependencies = (
 			);
-			name = "App reproductor";
+			name = "Naranja Music";
 			productName = "App reproductor";
-			productReference = 228225A4272445A500CBC3E2 /* App reproductor.app */;
+			productReference = 228225A4272445A500CBC3E2 /* Naranja Music.app */;
 			productType = "com.apple.product-type.application";
 		};
 		228225B9272445A600CBC3E2 /* App reproductorTests */ = {
@@ -219,7 +231,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				228225A3272445A500CBC3E2 /* App reproductor */,
+				228225A3272445A500CBC3E2 /* Naranja Music */,
 				228225B9272445A600CBC3E2 /* App reproductorTests */,
 				228225C3272445A600CBC3E2 /* App reproductorUITests */,
 			);
@@ -258,9 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C71573272D93950061A64D /* Model.swift in Sources */,
+				22C7156E272D75CD0061A64D /* WelcomeController.swift in Sources */,
 				228225AC272445A500CBC3E2 /* ViewController.swift in Sources */,
 				228225A8272445A500CBC3E2 /* AppDelegate.swift in Sources */,
 				228225AA272445A500CBC3E2 /* SceneDelegate.swift in Sources */,
+				222D34FF27285EE3004CC6E8 /* SignInController.swift in Sources */,
+				22FE09502724670100FF7274 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,12 +302,12 @@
 /* Begin PBXTargetDependency section */
 		228225BC272445A600CBC3E2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 228225A3272445A500CBC3E2 /* App reproductor */;
+			target = 228225A3272445A500CBC3E2 /* Naranja Music */;
 			targetProxy = 228225BB272445A600CBC3E2 /* PBXContainerItemProxy */;
 		};
 		228225C6272445A600CBC3E2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 228225A3272445A500CBC3E2 /* App reproductor */;
+			target = 228225A3272445A500CBC3E2 /* Naranja Music */;
 			targetProxy = 228225C5272445A600CBC3E2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -437,10 +453,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PTSGN23VN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "App reproductor/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Naranja Music";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -464,10 +483,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PTSGN23VN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "App reproductor/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Naranja Music";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -590,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		228225CE272445A600CBC3E2 /* Build configuration list for PBXNativeTarget "App reproductor" */ = {
+		228225CE272445A600CBC3E2 /* Build configuration list for PBXNativeTarget "Naranja Music" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				228225CF272445A600CBC3E2 /* Debug */,
