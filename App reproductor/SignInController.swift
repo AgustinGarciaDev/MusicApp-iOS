@@ -53,7 +53,7 @@ class SignInController: UIViewController {
         
         func searchUser (){
             if(model.user1.user == userName && model.user1.password == userPassword){
-                goToWelcomeController()
+                goToTableController()
             }
         }
         
@@ -64,15 +64,16 @@ class SignInController: UIViewController {
         
         var numberError : Int = 0
         
-        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{10,64}"
+        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}"
         
         let regExp = try! NSRegularExpression(pattern: patron, options: [])
             let coincidencias = regExp.matches(in: userName, options: [], range: NSRange(location: 0, length: userName.count))
         
         if userName.isEmpty {
             numberError = 1
-        }else if   coincidencias.count != 1  {
+        }else if coincidencias.count != 1  {
             print("entro")
+            print(coincidencias.count)
             numberError = 2
         }else if  passwordUser.count < 10 {
                 numberError = 4
@@ -88,10 +89,11 @@ class SignInController: UIViewController {
         print(#function)
     }
     
-    func goToWelcomeController() {
-      let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WelcomeController") as? WelcomeController
-      vc!.modalPresentationStyle = .fullScreen
-      self.present(vc!, animated: true)
+    func goToTableController() {
+      let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TracksTableViewController") as? TracksTableViewController
+        vc?.modalPresentationStyle = .fullScreen
+        guard let vc = vc else {return}
+      self.present(vc, animated: true)
     }
 
 }

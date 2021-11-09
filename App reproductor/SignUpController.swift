@@ -47,7 +47,7 @@ class SignUpController: UIViewController {
             case 4 :
                 print("Password contiene menos de 10 caracteres")
             default :
-                print("Logueado correctamente")
+                goToWelcomeController()
         }
         
     }
@@ -57,7 +57,7 @@ class SignUpController: UIViewController {
         
         var numberError : Int = 0
         
-        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{10,64}"
+        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}"
         
         let regExp = try! NSRegularExpression(pattern: patron, options: [])
             let coincidencias = regExp.matches(in: userName, options: [], range: NSRange(location: 0, length: userName.count))
@@ -66,6 +66,7 @@ class SignUpController: UIViewController {
             numberError = 1
         }else if   coincidencias.count != 1  {
             print("entro")
+            print(coincidencias.count)
             numberError = 2
         }else if  passwordUser.count < 10 {
                 numberError = 4
@@ -74,5 +75,12 @@ class SignUpController: UIViewController {
         }
         return numberError
     
+    }
+    
+    func goToWelcomeController() {
+      let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TabBarNavegation") as? UITabBarController
+        vc?.modalPresentationStyle = .fullScreen
+        guard let vc = vc else {return}
+      self.present(vc, animated: true)
     }
 }

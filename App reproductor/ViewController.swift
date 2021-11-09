@@ -14,7 +14,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-  
-
+    @IBOutlet weak var titulo: UILabel!
+    
+    @IBOutlet weak var btnSignUp: UIButton!
+    
+    @IBOutlet weak var btnSignIn: UIButton!
 }
 
