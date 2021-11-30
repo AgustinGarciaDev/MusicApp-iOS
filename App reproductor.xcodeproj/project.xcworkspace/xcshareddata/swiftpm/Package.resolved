@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AudioPlayer",
+        "repositoryURL": "https://github.com/tbaranes/AudioPlayerSwift",
+        "state": {
+          "branch": "master",
+          "revision": "2682d6a6128c4bb81a7511f36f575626639ee563",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -12,67 +12,102 @@ class TrackTableViewCell: UITableViewCell {
     var track:Track?
     var parent:ButtonOnCellDelegate?
     
+    //Propiedades computadas
+    var icono : UIImageView = {
+        let imgTrack = UIImageView()
+        imgTrack.image = UIImage(named: "audioTrack")
+        imgTrack.backgroundColor = .white
+        imgTrack.translatesAutoresizingMaskIntoConstraints = false
+        return imgTrack
+    }()
+    
+    var titulo : UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Titulo de la cancion"
+        lbl.font = UIFont.systemFont(ofSize: 20)
+        lbl.textColor = .white
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    var artista : UILabel  = {
+        let lbl = UILabel()
+        lbl.text = "Artista"
+        lbl.textAlignment = .left
+        lbl.font = UIFont.systemFont(ofSize: 12)
+        lbl.textColor = UIColor(named: "subTitle")
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    var btnPlay : ButtonUIButton = {
+        let botonUno = ButtonUIButton()
+        botonUno.icon = UIImage(named: "PlayBtn")
+        botonUno.secondIcon = UIImage(named: "StopBtn")
+        botonUno.tintColor = .black
+        botonUno.backgroundColor = .white
+        botonUno.translatesAutoresizingMaskIntoConstraints = false
+        botonUno.performTwoStateSelection()
+        return botonUno
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //Definimos obj
-        let imgTrack = UIImageView()
-//        imgTrack.autoresizingMask = .flexibleWidth
-        imgTrack.translatesAutoresizingMaskIntoConstraints = true
-        imgTrack.frame = CGRect(x: 20, y: 10, width:60, height:60)
-        imgTrack.image = UIImage(named: "audioTrack")
-        imgTrack.backgroundColor = .white
-        self.contentView.addSubview(imgTrack)
-        self.imageView?.contentMode = UIView.ContentMode.scaleToFill
+       
+       addSubview(icono)
+        NSLayoutConstraint.activate([
+            icono.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            icono.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            icono.leadingAnchor.constraint(equalTo: leadingAnchor, constant:25),
+            icono.widthAnchor.constraint(equalTo: icono.heightAnchor)
         
-        let labelUno = UILabel()
-        labelUno.text = "Titulo de la cancion"
-        labelUno.font = UIFont.systemFont(ofSize: 20)
-        labelUno.textColor = .white
-        labelUno.autoresizingMask = .flexibleWidth
-        labelUno.frame = CGRect(x: 105, y: 10, width: self.contentView.frame.width, height: 50)
-        labelUno.textAlignment = .left
-        labelUno.translatesAutoresizingMaskIntoConstraints = true
-        self.contentView.addSubview(labelUno)
+        ])
+        addSubview(btnPlay)
+        NSLayoutConstraint.activate([
+            btnPlay.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            btnPlay.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            btnPlay.trailingAnchor.constraint(equalTo: trailingAnchor, constant:-25),
+            btnPlay.widthAnchor.constraint(equalTo: btnPlay.heightAnchor),
+
+        ])
+        btnPlay.addTarget(self, action: #selector(handleAction), for: .touchUpInside)
         
-        let labelDos = UILabel()
-        labelDos.text = "Artista"
-        labelDos.textAlignment = .left
-        labelDos.font = UIFont.systemFont(ofSize: 12)
-        labelDos.textColor = UIColor(named: "subTitle")
-        labelDos.autoresizingMask = .flexibleWidth
-        labelDos.frame = CGRect(x: 105, y: 30, width: self.contentView.frame.width, height: 50)
-        labelDos.translatesAutoresizingMaskIntoConstraints = true
-        self.contentView.addSubview(labelDos)
+
+         addSubview(titulo)
+         NSLayoutConstraint.activate([
+            titulo.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titulo.heightAnchor.constraint(equalToConstant: 35),
+            titulo.leadingAnchor.constraint(equalTo: icono.trailingAnchor, constant: 5),
+            titulo.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -5)
+            
+         ])
+      
+         addSubview(artista)
+         NSLayoutConstraint.activate([
+            artista.heightAnchor.constraint(equalToConstant: 35),
+            artista.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            artista.leadingAnchor.constraint(equalTo: icono.trailingAnchor, constant: 5),
+            artista.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -5)
+
+         ])
         
-        let botonUno = UIButton(type: .system)
-        botonUno.frame = CGRect(x: 350, y: 20, width:50, height: 50)
-        botonUno.setImage(UIImage(named: "PlayBtn"), for: .normal)
-        botonUno.contentEdgeInsets = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
-        botonUno.layer.cornerRadius = 0.5 * botonUno.bounds.size.width
-        botonUno.tintColor = .black
-        botonUno.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
-        botonUno.translatesAutoresizingMaskIntoConstraints = true
-        botonUno.backgroundColor = .white
-        self.contentView.addSubview(botonUno)
-        botonUno.addTarget(self, action: #selector(handleAction), for: .touchUpInside)
-    }
-    @objc func handleAction(){
-        guard let parent = parent else { return }
-        parent.buttonTouchedOnCell(celda: self)
+      
     }
     
+    func setCancion (_ cancion: Track) {
+        titulo.text = cancion.title
+        artista.text = cancion.artist
+    }
+    
+    @objc func handleAction(_ sender: ButtonUIButton){
+        guard let parent = parent else { return }
+        parent.buttonTouchedOnCell(celda: self)
+        sender.performTwoStateSelection()
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

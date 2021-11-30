@@ -2,26 +2,48 @@
 
 import Foundation
 
+
+struct SongsList : Codable {
+    
+    let songs : [Track]
+}
+
 struct Account {
     let user: String
     let password: String
 }
-struct Track {
+struct Track : Codable , Hashable{
+    let song_id: String
     let title: String
-    let album : String
-    let artists: String
+    let artist: String?
+    let genre : generoMusicales?
+    let duration: Double?
+    let album : String?
+    
+   
 }
+
+enum generoMusicales: String, Codable {
+    case Rock = "Rock"
+    case vacio = ""
+}
+
 
 struct register {
     let user1: Account = Account(user:"agustinch@gmail.com", password:"holasw123456")
 }
-let misTracks = [
-    Track(title: "Traje unos tangos", album:"Modo diablo", artists: "YSY A"),
-    Track(title: "Oro negro", album:"Modo diablo", artists: "Modo diablo"),
-   Track(title: "Keloke", album:"Modo diablo", artists: "Khea"),
-   Track(title: "Quavo", album:"Modo diablo", artists: "Modo diablo"),
-    Track(title: "Traje unos tangos", album:"Modo diablo", artists: "YSY A"),
-    Track(title: "Oro negro", album:"Modo diablo", artists: "Modo diablo"),
-   Track(title: "Keloke", album:"Modo diablo", artists: "Khea"),
-   Track(title: "Quavo", album:"Modo diablo", artists: "Modo diablo"),
-]
+
+var misTracks = [Track]()
+//let misTracks = [
+//    Track(song_id: "1", title:"Oro negro", artists: "Traje unos tangos", genre: "YSY A" , duration: nil, album: nil),
+//
+//]
+
+
+
+enum PlayerStates {
+    case play
+    case stop
+    case next
+    case previous
+}

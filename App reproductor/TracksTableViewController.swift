@@ -10,18 +10,43 @@ import UIKit
 class TracksTableViewController: UITableViewController , ButtonOnCellDelegate {
    
     func buttonTouchedOnCell(celda: UITableViewCell) {
-        goToPlayer()
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Player") as? AudioPlayerViewController
+        guard let vc = vc else {return}
+        vc.modalPresentationStyle = .fullScreen
+        guard let indexPath = self.tableView.indexPath(for: celda)else {return}
+        let info = misTracks[indexPath.row]
+        vc.infoSong = info
+          self.present(vc, animated: true)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = .black
         // Le indicamos al table view de que tipo van a ser las celdas que va a mostrar
         self.tableView.register(TrackTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.rowHeight = 80.0
-       
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let callBack: ([Track]?, Error?) -> () = { canciones , error in
+            
+            if error != nil  {
+                print("Error")
+            }else{
+                misTracks = canciones ?? []
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        let api = APIManager()
+        api.getMusic(completion: callBack)
         
     }
+    
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -33,6 +58,8 @@ class TracksTableViewController: UITableViewController , ButtonOnCellDelegate {
         // #warning Incomplete implementation, return the number of rows
         return misTracks.count
     }
+    
+    
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,23 +69,17 @@ class TracksTableViewController: UITableViewController , ButtonOnCellDelegate {
 
         // Configure the cell...
         let elTrack = misTracks[indexPath.row]
-//        cell.textLabel?.text = elTrack.title
+        cell.setCancion(elTrack)
         cell.track = elTrack
         cell.parent = self
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
-    
-
         return cell
     }
-    func goToPlayer() {
-      let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Player") as? AudioPlayerViewController
-        vc?.modalPresentationStyle = .automatic
-        guard let vc = vc else {return}
-      self.present(vc, animated: true)
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
+        cell.btnPlay.performTwoStateSelection()
     }
-  
-
-   
 
 }

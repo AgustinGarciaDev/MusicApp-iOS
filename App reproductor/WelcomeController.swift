@@ -11,7 +11,7 @@ class WelcomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     @IBAction func logout(_ sender: Any) {
@@ -26,7 +26,7 @@ class WelcomeController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        logo.image = UIImage(named: "logoApp")
+        logo.image = UIImage(named: "logoNotBackground")
     }
     
     
