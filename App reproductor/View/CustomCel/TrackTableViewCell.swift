@@ -11,6 +11,7 @@ class TrackTableViewCell: UITableViewCell {
 
     var track:Track?
     var parent:ButtonOnCellDelegate?
+    var viewModel : TrackViewCellModel?
     
     //Propiedades computadas
     var icono : UIImageView = {
@@ -56,7 +57,9 @@ class TrackTableViewCell: UITableViewCell {
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //Definimos obj
+   
+        viewModel = TrackViewCellModel()
+        viewModel?.trackViewDelegate = self
        
        addSubview(icono)
         NSLayoutConstraint.activate([
@@ -99,17 +102,15 @@ class TrackTableViewCell: UITableViewCell {
     }
     
     func setCancion (_ cancion: Track) {
-        titulo.text = cancion.title
-        artista.text = cancion.artist
+        viewModel?.trackViewDelegate?.changeTextLabel(cancion)
     }
     
     @objc func handleAction(_ sender: ButtonUIButton){
-        guard let parent = parent else { return }
-        parent.buttonTouchedOnCell(celda: self)
-        sender.performTwoStateSelection()
+        viewModel?.trackViewDelegate?.actionButton(sender)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

@@ -12,22 +12,32 @@ class APIManager {
     
     var monitor : NWPathMonitor!
     
-    let baseUrl = "https://raw.githubusercontent.com"
+    let baseUrl = "https://raw.githubusercontent.com/beduExpert/Swift-Proyecto/main/API/db.json"
+    
     static let shared = APIManager()
-    static let getMusicEndpoint = "/beduExpert/Swift-Proyecto/main/API/db.json"
+
     
     func getMusic(completion: @escaping ([Track]? , Error?) -> ()){
-        let url : String = baseUrl + APIManager.getMusicEndpoint
         
-        let request :NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: url)! as URL)
+        
+        if !checkConnectivity() {
+                    completion(nil, NSError(domain: Bundle.main.bundleIdentifier!, code: 504, userInfo:nil))
+                    return
+        }
+        
+        
+        guard let url : URL = URL(string: baseUrl) else {
+            completion(nil, NSError(domain: Bundle.main.bundleIdentifier!, code: 500, userInfo:nil))
+            return
+        }
+       
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
-        
         let session = URLSession.shared
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: {datos, response, error -> Void in
             
             if(error != nil){
-//               misTracks = []\
                 completion(nil, error!)
             }else {
                 if let data = datos {
@@ -38,8 +48,6 @@ class APIManager {
                         let soungData = try JSONSerialization.data(withJSONObject: songs, options: .fragmentsAllowed)
                         let result = try JSONDecoder().decode([Track].self, from:soungData)
                         completion(result, nil)
-
-//                        misTracks = result
                     }
                     catch {
                         print(String(describing: error))
@@ -53,32 +61,19 @@ class APIManager {
         
     }
     
-    func red () {
-        
-        monitor = NWPathMonitor()
-        monitor.pathUpdateHandler = { Path in
-                    var internetEstatus = 1
+func checkConnectivity() -> Bool {
+    var monitor:NWPathMonitor!
+    monitor = NWPathMonitor()
+    var internetEstatus = true
+    monitor.pathUpdateHandler = { Path in
+                    
                     if Path.status == .satisfied {
-                        if Path.isExpensive { // Datos celulares
-                            internetEstatus = 0 // Si hay una conexion pero son datos celulares
-                        }
-                        else {
-                            print("Hay internet")
-                           
-                        }
+                        internetEstatus = false
                     }
-                    else {
-                        internetEstatus = -1 // No hay internet
-                    }
-            
-                    if internetEstatus != 1 { // No hay internet o es solo celular
-                        
-                    }else{
-                       print("hay internet")
-                    }
-                } // closure: bloque de código, que se puede usar como una variable
-                let elKiu = DispatchQueue (label: "NetworkMonitor")
-                monitor.start(queue: elKiu)
+
+                }
+        monitor.start(queue: DispatchQueue.global())
+                return internetEstatus
     }
     
 }

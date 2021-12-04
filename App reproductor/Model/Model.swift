@@ -29,17 +29,8 @@ enum generoMusicales: String, Codable {
 }
 
 
-struct register {
-    let user1: Account = Account(user:"agustinch@gmail.com", password:"holasw123456")
-}
-
 var misTracks = [Track]()
-//let misTracks = [
-//    Track(song_id: "1", title:"Oro negro", artists: "Traje unos tangos", genre: "YSY A" , duration: nil, album: nil),
-//
-//]
-
-
+var songsArray = [Track]()
 
 enum PlayerStates {
     case play

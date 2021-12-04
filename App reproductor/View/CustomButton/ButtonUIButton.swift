@@ -23,16 +23,15 @@ class ButtonUIButton: UIButton {
 
     func performTwoStateSelection(){
         self.isPlaying = !isPlaying
-//        print(isPlaying)
         self.setImage(isPlaying ? icon : secondIcon , for: .normal)
-        self.setImage(isPlaying ? icon : secondIcon , for: .highlighted)
+//        self.setImage(isPlaying ? icon : secondIcon , for: .highlighted)
     }
     
      func imgBtn(icon: UIImage?) {
         guard let icon = icon else {return}
         self.icon = icon
         self.setImage(icon , for: .normal)
-        self.setImage(icon, for: .highlighted)
+//        self.setImage(icon, for: .highlighted)
     }
 
 }

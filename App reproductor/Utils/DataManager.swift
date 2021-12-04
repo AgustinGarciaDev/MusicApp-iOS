@@ -9,7 +9,7 @@ import Foundation
 
 
 class DataManager{
-   static func cancionesPorGenero(song : [Track]) -> [Track]{
-       return song.filter{$0.genre != nil}
-    }
+    static func cancionesPorGenero(song : [Track]) -> [Track]{
+          return song.filter{$0.genre != nil}
+       }
 }

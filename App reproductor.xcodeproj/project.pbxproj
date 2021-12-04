@@ -10,8 +10,11 @@
 		222D34FF27285EE3004CC6E8 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222D34FE27285EE3004CC6E8 /* SignInController.swift */; };
 		224B222C27470DD2006643D4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224B222B27470DD2006643D4 /* APIManager.swift */; };
 		224F05892755553500F41C3C /* TracksPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F05882755553500F41C3C /* TracksPickerView.swift */; };
+		224F0591275694CC00F41C3C /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F0590275694CC00F41C3C /* SignInModel.swift */; };
+		224F05982756BC6E00F41C3C /* TracksTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F05972756BC6E00F41C3C /* TracksTableModel.swift */; };
+		224F059A2756F97A00F41C3C /* PlayListDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F05992756F97A00F41C3C /* PlayListDetailModel.swift */; };
+		224F059C2757098700F41C3C /* TrackPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F059B2757098700F41C3C /* TrackPickerModel.swift */; };
 		22646D142748046D0066866E /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22646D132748046D0066866E /* Network.framework */; };
-		22646D172748506C0066866E /* CurrentSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22646D162748506C0066866E /* CurrentSong.swift */; };
 		226F7C562735591A002D82DE /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F7C552735591A002D82DE /* TrackTableViewCell.swift */; };
 		226F7C58273567DC002D82DE /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F7C57273567DC002D82DE /* AudioPlayerViewController.swift */; };
 		227D35302732F07A0092658D /* TracksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D352F2732F07A0092658D /* TracksTableViewController.swift */; };
@@ -25,6 +28,9 @@
 		228225BF272445A600CBC3E2 /* App_reproductorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225BE272445A600CBC3E2 /* App_reproductorTests.swift */; };
 		228225C9272445A600CBC3E2 /* App_reproductorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225C8272445A600CBC3E2 /* App_reproductorUITests.swift */; };
 		228225CB272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228225CA272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift */; };
+		228737AF27579F6C00C67126 /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228737AE27579F6C00C67126 /* AudioPlayerModel.swift */; };
+		228737B32757EE7900C67126 /* TrackViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228737B22757EE7900C67126 /* TrackViewCellModel.swift */; };
+		228737B72757F76000C67126 /* TrackTableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228737B62757F76000C67126 /* TrackTableViewCell+Extension.swift */; };
 		229C0EBC273D732B00B8E752 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C0EBB273D732B00B8E752 /* UIImage+animatedGIF.m */; };
 		229C0EC0273D74D100B8E752 /* stegosaurus-studio.gif in Resources */ = {isa = PBXBuildFile; fileRef = 229C0EBF273D74D100B8E752 /* stegosaurus-studio.gif */; };
 		229C0F4D2746A00D00B8E752 /* AudioPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 229C0F4C2746A00D00B8E752 /* AudioPlayer */; };
@@ -37,7 +43,6 @@
 		22C7156E272D75CD0061A64D /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7156D272D75CD0061A64D /* WelcomeController.swift */; };
 		22C71573272D93950061A64D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C71572272D93950061A64D /* Model.swift */; };
 		22D3CA45274D3F640075F2DE /* ButtonUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */; };
-		22D3CA47274D426A0075F2DE /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3CA46274D426A0075F2DE /* HighlightButton.swift */; };
 		22FE09502724670100FF7274 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FE094F2724670100FF7274 /* SignUpController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +67,11 @@
 		222D34FE27285EE3004CC6E8 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		224B222B27470DD2006643D4 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		224F05882755553500F41C3C /* TracksPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksPickerView.swift; sourceTree = "<group>"; };
+		224F0590275694CC00F41C3C /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		224F05972756BC6E00F41C3C /* TracksTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksTableModel.swift; sourceTree = "<group>"; };
+		224F05992756F97A00F41C3C /* PlayListDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDetailModel.swift; sourceTree = "<group>"; };
+		224F059B2757098700F41C3C /* TrackPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPickerModel.swift; sourceTree = "<group>"; };
 		22646D132748046D0066866E /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
-		22646D162748506C0066866E /* CurrentSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSong.swift; sourceTree = "<group>"; };
 		226F7C552735591A002D82DE /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 		226F7C57273567DC002D82DE /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
 		227D352F2732F07A0092658D /* TracksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksTableViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +89,9 @@
 		228225C4272445A600CBC3E2 /* App reproductorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App reproductorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		228225C8272445A600CBC3E2 /* App_reproductorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_reproductorUITests.swift; sourceTree = "<group>"; };
 		228225CA272445A600CBC3E2 /* App_reproductorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_reproductorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		228737AE27579F6C00C67126 /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
+		228737B22757EE7900C67126 /* TrackViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewCellModel.swift; sourceTree = "<group>"; };
+		228737B62757F76000C67126 /* TrackTableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackTableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		229C0EB9273D732A00B8E752 /* Naranja Music-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Naranja Music-Bridging-Header.h"; sourceTree = "<group>"; };
 		229C0EBA273D732B00B8E752 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		229C0EBB273D732B00B8E752 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
@@ -94,7 +105,6 @@
 		22C7156D272D75CD0061A64D /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		22C71572272D93950061A64D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonUIButton.swift; sourceTree = "<group>"; };
-		22D3CA46274D426A0075F2DE /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		22FE094F2724670100FF7274 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,8 +141,84 @@
 				224B222B27470DD2006643D4 /* APIManager.swift */,
 				22B027C8274FF0D800852B28 /* UIButton+Extension.swift */,
 				22B027CA274FF0F700852B28 /* UIImage+Extension.swift */,
+				229C0F502746CF7800B8E752 /* DataManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		224F058C27568D0A00F41C3C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				228225A9272445A500CBC3E2 /* SceneDelegate.swift */,
+				228225A7272445A500CBC3E2 /* AppDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		224F058D27568D2D00F41C3C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22B027F02751AFC500852B28 /* sound.gif */,
+				229C0F4E2746BCCC00B8E752 /* fuego.mp3 */,
+				229C0EBF273D74D100B8E752 /* stegosaurus-studio.gif */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		224F05922756B06300F41C3C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				224F0590275694CC00F41C3C /* SignInModel.swift */,
+				224F05972756BC6E00F41C3C /* TracksTableModel.swift */,
+				224F05992756F97A00F41C3C /* PlayListDetailModel.swift */,
+				224F059B2757098700F41C3C /* TrackPickerModel.swift */,
+				228737AE27579F6C00C67126 /* AudioPlayerModel.swift */,
+				228737B22757EE7900C67126 /* TrackViewCellModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		224F05932756B09B00F41C3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				224F05962756BB1D00F41C3C /* CustomButton */,
+				224F05942756B9C600F41C3C /* CustomCel */,
+				222D34FE27285EE3004CC6E8 /* SignInController.swift */,
+				228225AB272445A500CBC3E2 /* ViewController.swift */,
+				227D352F2732F07A0092658D /* TracksTableViewController.swift */,
+				22B027F427552B8E00852B28 /* PlayListDetailController.swift */,
+				224F05882755553500F41C3C /* TracksPickerView.swift */,
+				226F7C57273567DC002D82DE /* AudioPlayerViewController.swift */,
+				22C7156D272D75CD0061A64D /* WelcomeController.swift */,
+				22FE094F2724670100FF7274 /* SignUpController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		224F05942756B9C600F41C3C /* CustomCel */ = {
+			isa = PBXGroup;
+			children = (
+				226F7C552735591A002D82DE /* TrackTableViewCell.swift */,
+				228737B62757F76000C67126 /* TrackTableViewCell+Extension.swift */,
+			);
+			path = CustomCel;
+			sourceTree = "<group>";
+		};
+		224F05952756BABB00F41C3C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				227D35312734353F0092658D /* Protocols.swift */,
+				22C71572272D93950061A64D /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		224F05962756BB1D00F41C3C /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */,
+			);
+			path = CustomButton;
 			sourceTree = "<group>";
 		};
 		22646D122748046D0066866E /* Frameworks */ = {
@@ -146,7 +232,8 @@
 		22646D152748502D0066866E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				22646D162748506C0066866E /* CurrentSong.swift */,
+				228225B2272445A600CBC3E2 /* LaunchScreen.storyboard */,
+				228225AD272445A500CBC3E2 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,34 +262,18 @@
 		228225A6272445A500CBC3E2 /* App reproductor */ = {
 			isa = PBXGroup;
 			children = (
+				224F058C27568D0A00F41C3C /* Common */,
 				22646D152748502D0066866E /* Views */,
 				224B222A27470D9F006643D4 /* Utils */,
+				224F058D27568D2D00F41C3C /* Resources */,
+				224F05932756B09B00F41C3C /* View */,
+				224F05922756B06300F41C3C /* ViewModels */,
+				224F05952756BABB00F41C3C /* Model */,
 				229C0EBB273D732B00B8E752 /* UIImage+animatedGIF.m */,
-				229C0EBA273D732B00B8E752 /* UIImage+animatedGIF.h */,
-				229C0EBF273D74D100B8E752 /* stegosaurus-studio.gif */,
-				22B027F02751AFC500852B28 /* sound.gif */,
-				228225A7272445A500CBC3E2 /* AppDelegate.swift */,
-				228225A9272445A500CBC3E2 /* SceneDelegate.swift */,
-				229C0F4E2746BCCC00B8E752 /* fuego.mp3 */,
-				22B027F427552B8E00852B28 /* PlayListDetailController.swift */,
-				228225AB272445A500CBC3E2 /* ViewController.swift */,
-				228225AD272445A500CBC3E2 /* Main.storyboard */,
 				228225B0272445A600CBC3E2 /* Assets.xcassets */,
-				228225B2272445A600CBC3E2 /* LaunchScreen.storyboard */,
 				228225B5272445A600CBC3E2 /* Info.plist */,
-				226F7C552735591A002D82DE /* TrackTableViewCell.swift */,
-				22FE094F2724670100FF7274 /* SignUpController.swift */,
-				222D34FE27285EE3004CC6E8 /* SignInController.swift */,
-				22C7156D272D75CD0061A64D /* WelcomeController.swift */,
-				22C71572272D93950061A64D /* Model.swift */,
-				227D352F2732F07A0092658D /* TracksTableViewController.swift */,
-				227D35312734353F0092658D /* Protocols.swift */,
-				224F05882755553500F41C3C /* TracksPickerView.swift */,
-				226F7C57273567DC002D82DE /* AudioPlayerViewController.swift */,
 				229C0EB9273D732A00B8E752 /* Naranja Music-Bridging-Header.h */,
-				229C0F502746CF7800B8E752 /* DataManager.swift */,
-				22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */,
-				22D3CA46274D426A0075F2DE /* HighlightButton.swift */,
+				229C0EBA273D732B00B8E752 /* UIImage+animatedGIF.h */,
 			);
 			path = "App reproductor";
 			sourceTree = "<group>";
@@ -366,16 +437,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C71573272D93950061A64D /* Model.swift in Sources */,
-				22D3CA47274D426A0075F2DE /* HighlightButton.swift in Sources */,
 				229C0EBC273D732B00B8E752 /* UIImage+animatedGIF.m in Sources */,
 				227D35302732F07A0092658D /* TracksTableViewController.swift in Sources */,
-				22646D172748506C0066866E /* CurrentSong.swift in Sources */,
+				224F05982756BC6E00F41C3C /* TracksTableModel.swift in Sources */,
 				22B027C9274FF0D800852B28 /* UIButton+Extension.swift in Sources */,
 				224F05892755553500F41C3C /* TracksPickerView.swift in Sources */,
 				226F7C58273567DC002D82DE /* AudioPlayerViewController.swift in Sources */,
 				22D3CA45274D3F640075F2DE /* ButtonUIButton.swift in Sources */,
+				228737B32757EE7900C67126 /* TrackViewCellModel.swift in Sources */,
+				228737B72757F76000C67126 /* TrackTableViewCell+Extension.swift in Sources */,
+				224F059C2757098700F41C3C /* TrackPickerModel.swift in Sources */,
+				228737AF27579F6C00C67126 /* AudioPlayerModel.swift in Sources */,
 				22C7156E272D75CD0061A64D /* WelcomeController.swift in Sources */,
 				227D35322734353F0092658D /* Protocols.swift in Sources */,
+				224F0591275694CC00F41C3C /* SignInModel.swift in Sources */,
 				224B222C27470DD2006643D4 /* APIManager.swift in Sources */,
 				228225AC272445A500CBC3E2 /* ViewController.swift in Sources */,
 				226F7C562735591A002D82DE /* TrackTableViewCell.swift in Sources */,
@@ -383,6 +458,7 @@
 				22B027F527552B8E00852B28 /* PlayListDetailController.swift in Sources */,
 				228225AA272445A500CBC3E2 /* SceneDelegate.swift in Sources */,
 				222D34FF27285EE3004CC6E8 /* SignInController.swift in Sources */,
+				224F059A2756F97A00F41C3C /* PlayListDetailModel.swift in Sources */,
 				22B027CB274FF0F700852B28 /* UIImage+Extension.swift in Sources */,
 				229C0F512746CF7800B8E752 /* DataManager.swift in Sources */,
 				22FE09502724670100FF7274 /* SignUpController.swift in Sources */,

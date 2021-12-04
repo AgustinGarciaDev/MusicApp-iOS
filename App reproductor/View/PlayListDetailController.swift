@@ -7,13 +7,11 @@
 
 import UIKit
 
-class PlayListDetailController: UIViewController , TracksPickerDelegate {
-    
-   
-    var songs = Set<Track>()
-    var songsArray = [Track]()
+class PlayListDetailController: UIViewController , TracksPickerDelegate , ShowViewDelegate {
+
     var viewSongs = TracksPickerView()
     var btnStatus = false
+    var viewModel : PlayListDetailModel?
     
     var listSongs  : UITableView = {
         let table = UITableView()
@@ -21,20 +19,16 @@ class PlayListDetailController: UIViewController , TracksPickerDelegate {
         return table
     }()
     
-    func addTrack(song: Track) {
-        
-        for songOne in songsArray{
-            if songOne == song {
-                let alert = UIAlertController(title: "", message: "Esta cancion ya esta agregada", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-            }
-        }
-        songs.insert(song)
-        songsArray = Array(songs)
-        listSongs.reloadData()
-        print("me ejecuto add ")
+    func showView() {
+        btnStatus = !btnStatus
+        viewSongs.trackDelegate = self
+        btnStatus ? self.view.addSubview(viewSongs) : viewSongs.removeFromSuperview()
     }
+    
+  func reloadTableView() {
+            listSongs.reloadData()
+   }
+       
 
 
     var inputText : UITextField = {
@@ -42,6 +36,7 @@ class PlayListDetailController: UIViewController , TracksPickerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.placeholder = "Playlist..."
         label.tintColor = .orange
+        label.leftViewMode = UITextField.ViewMode.always
         label.backgroundColor = .orange
         label.sizeToFit()
         return label
@@ -49,19 +44,24 @@ class PlayListDetailController: UIViewController , TracksPickerDelegate {
     
     var btnAddSong : UIButton = {
         let btn = UIButton()
+        let configurationIcon = UIImage.SymbolConfiguration(
+            pointSize: 32, weight: .medium, scale: .default)
         btn.backgroundColor = .black
-        btn.setImage(UIImage(systemName: "plus"), for: .normal)
+        btn.setImage(UIImage(systemName: "plus", withConfiguration: configurationIcon), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
 
         return btn
     }()
     
  
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .black
+        viewModel = PlayListDetailModel()
+        viewModel?.showViewDelegate = self
+        viewModel?.reloadDataDelegate = self
         let safeA = self.view.safeAreaLayoutGuide
         self.view.addSubview(inputText)
         NSLayoutConstraint.activate([
@@ -83,51 +83,54 @@ class PlayListDetailController: UIViewController , TracksPickerDelegate {
         btnAddSong.addTarget(self, action: #selector(callSubView), for: .touchUpInside)
         
         
-        listSongs.backgroundColor = .gray
+        listSongs.backgroundColor = .black
         self.view.addSubview(listSongs)
         NSLayoutConstraint.activate([
            listSongs.topAnchor.constraint(equalTo: inputText.bottomAnchor, constant: 10 ),
             listSongs.bottomAnchor.constraint(equalTo: safeA.bottomAnchor, constant: -5),
-            listSongs.leadingAnchor.constraint(equalTo: safeA.leadingAnchor, constant: 25),
-            listSongs.trailingAnchor.constraint(equalTo: safeA.trailingAnchor,constant: -12),
+            listSongs.leadingAnchor.constraint(equalTo: safeA.leadingAnchor, constant: 0),
+            listSongs.trailingAnchor.constraint(equalTo: safeA.trailingAnchor,constant: 0),
         ])
-        listSongs.delegate = self
-        listSongs.dataSource = self
-        listSongs.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        listSongs.register(TrackTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        listSongs.delegate = viewModel!
+        listSongs.dataSource = viewModel!
+        listSongs.rowHeight = 80.0
         
     }
     
     @objc func callSubView(){
-        
-    btnStatus = !btnStatus
-    viewSongs.trackDelegate = self
-    btnStatus ? self.view.addSubview(viewSongs) : viewSongs.removeFromSuperview()
-
+        viewModel?.showViewDelegate?.showView()
     }
-
-
-}
-
-
-
-extension  PlayListDetailController : UITableViewDataSource  {
-    func numberOfSections(in tableView: UITableView) -> Int {
-       // #warning Incomplete implementation, return the number of sections
-       return 1
-   }
-   
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return songsArray.count
-      }
     
+    func addTrack(song: Track) {
+        
+        viewModel?.addSongTable(song)
 
-}
-
-extension PlayListDetailController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      let song = songsArray[indexPath.row]
-      cell.textLabel?.text = song.title
-      return cell
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel?.reloadDataDelegate?.reloadDataTable()
+    }
+    
+    }
+
+extension PlayListDetailController : ReloadDataDelegate {
+        func reloadDataTable() {
+            listSongs.reloadData()
+        }
+    func changeView(_ celda: UITableViewCell) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Player") as? AudioPlayerViewController
+        guard let vc = vc else {return}
+        vc.modalPresentationStyle = .fullScreen
+        guard let indexPath = self.listSongs.indexPath(for: celda)else {return}
+        if let delegate = self.listSongs.delegate {
+            delegate.tableView!(self.listSongs, didEndDisplaying: celda, forRowAt: indexPath)
+        }
+        let info = songsArray[indexPath.row]
+
+        print(info)
+        vc.infoSong = info
+          self.present(vc, animated: true)
+    }
+    
 }

@@ -9,6 +9,7 @@ import UIKit
 import AudioPlayer
 
 class AudioPlayerViewController: UIViewController {
+    
 
     var isPlaying : Bool = true
     var mySound : AudioPlayer?
@@ -17,33 +18,21 @@ class AudioPlayerViewController: UIViewController {
     var labelTres = UILabel()
     var timer = Timer()
     var labelUno = UILabel()
-
+    var viewModel : AudioPlayerModel?
     
     
     override func viewWillAppear(_ animated: Bool) {
-        if let title = infoSong?.title {
-            self.labelUno.text = title
-        }
-        
-        if let artist = infoSong?.artist{
-            self.labelTres.text = artist
-        }
-         
+        viewModel?.audioPlayerDelegate?.setData(infoSong!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let getUrl =  Bundle.main.url(forResource: "fuego", withExtension: ".mp3") else {
-            return
-        }
         
-        do{
-            mySound = try AudioPlayer(contentsOf: getUrl)
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(update), userInfo: nil, repeats: true)
-           
-        }catch{
-            print("Ocurrio un error inesperado")
-        }
+        viewModel = AudioPlayerModel()
+        viewModel?.audioPlayerDelegate = self
+        viewModel?.audioPlayerDelegate?.audioPlayer()
+        
+        
         
         let btnClose = UIButton()
         let configurationIcon = UIImage.SymbolConfiguration(
@@ -135,16 +124,96 @@ class AudioPlayerViewController: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
-
-        mySound?.play()
+        viewModel?.audioPlayerDelegate?.play()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-       mySound?.stop()
-        
+        viewModel?.audioPlayerDelegate?.stop()
     }
     
     @objc func controlRepro(){
+        viewModel?.audioPlayerDelegate?.playerControl()
+    }
+    
+    @objc func changeIcon(_ sender:ButtonUIButton) {
+        viewModel?.audioPlayerDelegate?.iconStopAndPlay(sender)
+    }
+    
+    @objc func close(){
+        viewModel?.audioPlayerDelegate?.closeAudioPlayer()
+    }
+
+   @objc func update() {
+    
+       viewModel?.audioPlayerDelegate?.updateSlider()
+
+   }
+    
+    @objc func volumen(sender: UISlider){
+        viewModel?.audioPlayerDelegate?.volumenPlayer(sender)
+    }
+    @objc func timeSound(_ sender:UISlider){
+        viewModel?.audioPlayerDelegate?.songTime(sender)
+    }
+    
+ 
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        viewModel?.audioPlayerDelegate?.motinEfect()
+    }
+}
+
+
+extension  AudioPlayerViewController: AudioPlayerProtocol {
+    func volumenPlayer(_ sender: UISlider) {
+        mySound?.volume = sender.value
+    }
+    
+    func stop() {
+        mySound?.stop()
+    }
+    
+    func play() {
+        mySound?.play()
+    }
+    
+   
+    func setData(_ song: Track) {
+
+        self.labelUno.text = song.title
+        self.labelTres.text = song.artist
+    }
+    
+    func audioPlayer() {
+        guard let getUrl =  Bundle.main.url(forResource: "fuego", withExtension: ".mp3") else {
+            return
+        }
+        
+        do{
+            mySound = try AudioPlayer(contentsOf: getUrl)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+           
+        }catch{
+            print("Ocurrio un error inesperado")
+        }
+    }
+    
+    func motinEfect() {
+        isPlaying = !isPlaying
+        
+        if isPlaying == true{
+            mySound?.play()
+        }else {
+            mySound?.stop()
+        }
+    }
+    
+    func songTime(_ sender:UISlider){
+        mySound?.stop()
+        mySound?.currentTime = TimeInterval(sender.value)
+        mySound?.play()
+    }
+    
+    func playerControl() {
         isPlaying = !isPlaying
         
         if isPlaying == true{
@@ -154,54 +223,17 @@ class AudioPlayerViewController: UIViewController {
             mySound?.stop()
         }
     }
+    func updateSlider() {
+        guard let tiempo = mySound?.currentTime else {return }
+        slider.value = Float(tiempo)
+    }
     
-    @objc func changeIcon(_ sender:ButtonUIButton) {
+    func iconStopAndPlay(_ sender:ButtonUIButton) {
         sender.performTwoStateSelection()
     }
     
-    @objc func close(){
+    func closeAudioPlayer() {
         dismiss(animated: true)
     }
-    
-    
-    
-//   @objc func playSound(){
-//    mySound?.play()
-//    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector:#selector(update), userInfo: nil, repeats: true)
-//    }
-    
-   @objc func update() {
-       guard let tiempo = mySound?.currentTime else {return }
-       slider.value = Float(tiempo)
-
-   }
-    
-//   @objc func stopSound(){
-//       mySound?.stop()
-//       timer.invalidate()
-//   }
-    
-    @objc func volumen(sender: UISlider){
-        mySound?.volume = sender.value
-        
-    }
-    @objc func timeSound(sender:UISlider){
-        mySound?.stop()
-        mySound?.currentTime = TimeInterval(sender.value)
-        mySound?.play()
-    }
-    
- 
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        isPlaying = !isPlaying
-        
-        if isPlaying == true{
-            mySound?.play()
-        }else {
-            mySound?.stop()
-        }
-        
-    }
-    
-
 }
+    

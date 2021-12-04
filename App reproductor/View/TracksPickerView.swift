@@ -11,13 +11,16 @@ protocol TracksPickerDelegate {
     func addTrack(song:Track)
 }
 
-class TracksPickerView: UIView {
+class TracksPickerView: UIView{
 
     var trackDelegate : TracksPickerDelegate?
-    
+    var viewModel: TracksTableModel?
+    var viewModelPicker : TrackPickerModel?
     var btnClose: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
+        let configurationIcon = UIImage.SymbolConfiguration(
+            pointSize: 28, weight: .medium, scale: .default)
+        btn.setImage(UIImage(systemName: "x.circle", withConfiguration: configurationIcon), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
 
         return btn
@@ -25,7 +28,9 @@ class TracksPickerView: UIView {
     
     var btnAdd : UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "plus"), for: .normal)
+        let configurationIcon = UIImage.SymbolConfiguration(
+            pointSize: 28, weight: .medium, scale: .default)
+        btn.setImage(UIImage(systemName: "plus", withConfiguration: configurationIcon), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
 
         return btn
@@ -39,17 +44,15 @@ class TracksPickerView: UIView {
 
    override init (frame : CGRect) {
     super.init(frame : frame)
-       
-
-       
        self.backgroundColor = .orange
-       self.frame = CGRect(x: 0, y: 500, width: 800, height: 500)
+       self.frame = CGRect(x: 0, y: 390, width: 800, height: 300)
        
 
        btnClose.addTarget(self, action: #selector(close), for: .touchUpInside)
        self.addSubview(btnClose)
        NSLayoutConstraint.activate([
-        btnClose.topAnchor.constraint(equalTo: self.topAnchor , constant: 20),
+        btnClose.topAnchor.constraint(equalTo: self.topAnchor , constant: 10),
+        btnClose.leadingAnchor.constraint(equalTo: self.leadingAnchor , constant: 30),
         btnClose.widthAnchor.constraint(equalToConstant: 50),
         btnClose.heightAnchor.constraint(equalToConstant: 50),
        ])
@@ -58,54 +61,43 @@ class TracksPickerView: UIView {
        btnAdd.addTarget(self, action: #selector(addSong), for: .touchUpInside)
        self.addSubview(btnAdd)
               NSLayoutConstraint.activate([
-               btnAdd.topAnchor.constraint(equalTo: self.topAnchor , constant: 20),
+               btnAdd.topAnchor.constraint(equalTo: self.topAnchor , constant: 10),
                btnAdd.widthAnchor.constraint(equalToConstant: 50),
                btnAdd.heightAnchor.constraint(equalToConstant: 50),
-               btnAdd.trailingAnchor.constraint(equalTo: btnClose.trailingAnchor , constant: 350)
+               btnAdd.trailingAnchor.constraint(equalTo: btnClose.trailingAnchor , constant: 300)
         ])
 
        
-       
-     
-       
        self.addSubview(pickerList)
        NSLayoutConstraint.activate([
-        pickerList.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
-       
-        pickerList.widthAnchor.constraint(equalToConstant: 412)
+        pickerList.topAnchor.constraint(equalTo: btnClose.bottomAnchor, constant: 5),
+        pickerList.widthAnchor.constraint(equalToConstant: 412),
+        pickerList.heightAnchor.constraint(equalToConstant: 200)
 
        ])
-       pickerList.dataSource = self
-       pickerList.delegate = self
+       viewModelPicker = TrackPickerModel()
+       viewModelPicker?.viewTrackDelegate = self
+       viewModel = TracksTableModel()
+       viewModel?.reloadDataDelegate = self
+       viewModel?.callToApi()
        
+       pickerList.dataSource = viewModelPicker!
+       pickerList.delegate = viewModelPicker!
        
+     
+
        
-       let callBack: ([Track]?, Error?) -> () = { canciones , error in
-           
-           if error != nil  {
-               print("Error")
-           }else{
-               misTracks = canciones ?? []
-               
-           }
-       }
-       
-       let api = APIManager()
-       api.getMusic(completion: callBack)
-       print(misTracks)
    }
     
     @objc func addSong(){
         if trackDelegate != nil {
-            print("entro")
             let selectedRow = self.pickerList.selectedRow(inComponent: 0)
             let value = misTracks[selectedRow]
-            print(value)
            trackDelegate?.addTrack(song: value)
         }
     }
     @objc func close(){
-        self.removeFromSuperview()
+        viewModelPicker?.viewTrackDelegate?.removeView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,20 +108,19 @@ class TracksPickerView: UIView {
 }
 
 
-extension TracksPickerView : UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        misTracks.count
-    }
-}
 
-extension TracksPickerView : UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        return misTracks[row].title
-
+extension TracksPickerView : ReloadDataDelegate{
+    func changeView(_ celda: UITableViewCell) {
+       }
+    
+    func reloadDataTable() {
+        pickerList.reloadAllComponents()
     }
    
+}
+
+extension TracksPickerView: TracksPickerDelegateView{
+    func removeView() {
+        self.removeFromSuperview()
+    }
 }
