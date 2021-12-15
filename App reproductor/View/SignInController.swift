@@ -43,9 +43,9 @@ class SignInController: UIViewController {
         let mensaje = viewModel?.validateFields(userName: userName , passwordUser: userPassword)
         
         if mensaje != "Logueado" && mensaje != "Usuario Existente" {
-            let alert = UIAlertController(title: "", message: mensaje , preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            self.textFieldUserName.errorAnimated()
+            self.textFieldUserPasswork.errorAnimated()
+            self.alertModal(mensaje)
         }
         if mensaje == "Usuario Existente"{
             goToWelcomeController()

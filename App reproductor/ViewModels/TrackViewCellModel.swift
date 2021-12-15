@@ -10,8 +10,18 @@ import Foundation
 protocol TrackViewCellProtocol {
     
     func changeTextLabel(_ cancion: Track)
-    func actionButton(_ button: ButtonUIButton)
+    func actionButton( _ celda : UITableViewCell) 
+    
 }
+
+protocol ButtonOnCellDelegate {
+    func buttonTouchedOnCell(celda: UITableViewCell)
+    func textAlert(_ message: String)
+}
+
+
+
+
 class TrackViewCellModel {
     
     var trackViewDelegate :TrackViewCellProtocol?

@@ -20,7 +20,16 @@ protocol AudioPlayerProtocol {
     func play()
     func volumenPlayer(_ sender:UISlider)
     func closeAudioPlayer()
+    func menuButton() -> UIMenu
+    func showMenu(_ sender : UIButton)
+
 }
+
+protocol BtnStatus {
+    func audioPlayerDismissing()
+    func refreshTable()
+}
+
 
 
 class AudioPlayerModel {
@@ -29,6 +38,8 @@ class AudioPlayerModel {
     var isPlaying : Bool = true
     var audioPlayerDelegate : AudioPlayerProtocol?
     var timer = Timer()
+    
+    
 }
 
 

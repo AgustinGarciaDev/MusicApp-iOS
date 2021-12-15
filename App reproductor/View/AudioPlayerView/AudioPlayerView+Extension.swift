@@ -10,6 +10,60 @@ import UIKit
 import AudioPlayer
 
 extension  AudioPlayerViewController: AudioPlayerProtocol {
+    func showMenu(_ sender: UIButton) {
+        if #available(iOS 14.0, *) {
+            sender.menu = viewModel?.audioPlayerDelegate?.menuButton()
+            sender.showsMenuAsPrimaryAction = true
+        } else {
+            print("no hay menu")
+        }
+    }
+    
+    func menuButton() -> UIMenu{
+        
+        var menuItems: [UIAction] {
+            return [
+                UIAction(title: "Delete from library", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                    btnMenuOptions.trash.borrarCancion(self.infoSong!)
+                    self.dismiss(animated: true){
+                        self.delegate?.refreshTable()
+                        
+                    }
+                }),
+                UIAction(title: "Add to a playlist", image: UIImage(systemName: "play.fill"), handler: { (_) in
+                    btnMenuOptions.addPlaylist.agregarAplaylist(self.infoSong!)
+                }),
+                UIAction(title: "Share song", image: UIImage(systemName: "square.and.arrow.up.fill"), handler: { (_) in
+                    btnMenuOptions.addPlaylist.compartirCancion()
+                    let song = [self.infoSong!.artist ,  self.infoSong!.title ]
+                    let ac = UIActivityViewController(activityItems: song as [Any], applicationActivities: nil)
+                    ac.popoverPresentationController?.sourceView = self.view
+                    self.present(ac, animated: true)
+
+                }),
+                UIAction(title: "download", image: UIImage(systemName: "tray.and.arrow.down.fill"), handler: { (_) in
+                    btnMenuOptions.download.descargarCancion()
+                    let message = "Estas por descargar \(self.infoSong!.title)"
+                    self.alertModal(message)
+                }),
+                UIAction(title: like, image: UIImage(systemName: "heart.fill"), handler: { (_ sender) in
+                    self.view.addSubview(self.likeView)
+                    self.like = "Unlove"
+                    btnMenuOptions.love.likearCancion()
+                }),
+            ]
+        }
+        
+        
+        var demoMenu: UIMenu {
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+        }
+        
+        return demoMenu
+    }
+    
+    
+    
     func volumenPlayer(_ sender: UISlider) {
         mySound?.volume = sender.value
     }
@@ -30,7 +84,7 @@ extension  AudioPlayerViewController: AudioPlayerProtocol {
     }
     
     func audioPlayer() {
-        guard let getUrl =  Bundle.main.url(forResource: "fuego", withExtension: ".mp3") else {
+        guard let getUrl = Bundle.main.url(forResource: "fuego", withExtension: ".mp3") else {
             return
         }
         
@@ -80,6 +134,8 @@ extension  AudioPlayerViewController: AudioPlayerProtocol {
     
     func closeAudioPlayer() {
         dismiss(animated: true)
+        
     }
+    
 }
     

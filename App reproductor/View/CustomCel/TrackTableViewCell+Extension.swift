@@ -8,13 +8,14 @@
 import Foundation
 
 extension TrackTableViewCell : TrackViewCellProtocol {
-    func actionButton(_ button:ButtonUIButton) {
+    func actionButton(_ celda : UITableViewCell) {
         guard let parent = parent else { return }
-        parent.buttonTouchedOnCell(celda: self)
-        button.performTwoStateSelection()
+        parent.buttonTouchedOnCell(celda: celda)
+
     }
     func changeTextLabel(_ cancion: Track) {
         titulo.text = cancion.title
         artista.text = cancion.artist
     }
+   
 }

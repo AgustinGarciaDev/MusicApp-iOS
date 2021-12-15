@@ -9,7 +9,3 @@ import Foundation
 import UIKit
 
 
-protocol ButtonOnCellDelegate {
-    func buttonTouchedOnCell(celda: UITableViewCell)
-}
-

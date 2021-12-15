@@ -109,18 +109,3 @@ class TracksPickerView: UIView{
 
 
 
-extension TracksPickerView : ReloadDataDelegate{
-    func changeView(_ celda: UITableViewCell) {
-       }
-    
-    func reloadDataTable() {
-        pickerList.reloadAllComponents()
-    }
-   
-}
-
-extension TracksPickerView: TracksPickerDelegateView{
-    func removeView() {
-        self.removeFromSuperview()
-    }
-}

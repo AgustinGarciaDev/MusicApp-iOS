@@ -8,7 +8,7 @@
 import UIKit
 import AudioPlayer
 
-class AudioPlayerViewController: UIViewController {
+class AudioPlayerViewController: UIViewController  {
     
 
     var isPlaying : Bool = true
@@ -19,8 +19,11 @@ class AudioPlayerViewController: UIViewController {
     var timer = Timer()
     var labelUno = UILabel()
     var viewModel : AudioPlayerModel?
-    
-    
+    var delegate : BtnStatus?
+    var miButton = UIButton()
+    var like : String = "Love"
+    var likeView = LikeViewController()
+   
     override func viewWillAppear(_ animated: Bool) {
         viewModel?.audioPlayerDelegate?.setData(infoSong!)
     }
@@ -32,6 +35,7 @@ class AudioPlayerViewController: UIViewController {
         viewModel?.audioPlayerDelegate = self
         viewModel?.audioPlayerDelegate?.audioPlayer()
         
+        self.view.backgroundColor = .white
         
         
         let btnClose = UIButton()
@@ -54,19 +58,26 @@ class AudioPlayerViewController: UIViewController {
         }
 
         labelUno.text = "AudioPlayer"
-        labelUno.font = UIFont.systemFont(ofSize: 26)
+        labelUno.font = UIFont.systemFont(ofSize: 23)
         labelUno.autoresizingMask = .flexibleWidth
-        labelUno.frame = CGRect(x: 2, y: 300, width: self.view.frame.width, height: 50)
+        labelUno.frame = CGRect(x: 40, y: 300, width: self.view.frame.width, height: 50)
         labelUno.translatesAutoresizingMaskIntoConstraints = true
-        labelUno.textAlignment = .center
+        labelUno.textAlignment = .left
         self.view.addSubview(labelUno)
+        
+        miButton.setImage(UIImage(systemName: "ellipsis.circle", withConfiguration: configurationIcon), for: .normal)
+        miButton.translatesAutoresizingMaskIntoConstraints = true
+        miButton.frame = CGRect(x: 330, y: 310, width: 30, height: 30)
+        self.view.addSubview(miButton)
+        miButton.addTarget(self, action: #selector(viewMenu) , for: .touchUpInside)
+
         
         labelTres.text = "Artista"
         labelTres.font = UIFont.systemFont(ofSize: 20)
         labelTres.autoresizingMask = .flexibleWidth
-        labelTres.frame = CGRect(x: 2, y: 340, width: self.view.frame.width, height: 50)
+        labelTres.frame = CGRect(x: 40, y: 340, width: self.view.frame.width, height: 50)
         labelTres.translatesAutoresizingMaskIntoConstraints = true
-        labelTres.textAlignment = .center
+        labelUno.textAlignment = .left
         self.view.addSubview(labelTres)
         
         
@@ -88,7 +99,7 @@ class AudioPlayerViewController: UIViewController {
         
         slider.autoresizingMask = .flexibleWidth
         slider.translatesAutoresizingMaskIntoConstraints = true
-        slider.frame = CGRect(x: 30, y: 410, width: self.view.frame.width-100, height: 10)
+        slider.frame = CGRect(x: 20, y: 410, width: self.view.frame.width-100, height: 10)
         guard let duration = mySound?.duration else {return}
         slider.maximumValue = Float(duration)
         slider.center.x = self.view.center.x
@@ -117,8 +128,6 @@ class AudioPlayerViewController: UIViewController {
 
         self.view.addSubview(sliderDos)
         sliderDos.addTarget(self, action: #selector(volumen), for: .valueChanged)
-
-       
     }
  
     
@@ -129,8 +138,12 @@ class AudioPlayerViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         viewModel?.audioPlayerDelegate?.stop()
+        delegate?.audioPlayerDismissing()
     }
     
+    @objc func viewMenu(_ sender : UIButton){ 
+        viewModel?.audioPlayerDelegate?.showMenu(sender)
+    }
     @objc func controlRepro(){
         viewModel?.audioPlayerDelegate?.playerControl()
     }

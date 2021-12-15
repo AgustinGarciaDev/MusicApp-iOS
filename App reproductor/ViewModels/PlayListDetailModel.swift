@@ -10,6 +10,7 @@ import Foundation
 protocol ShowViewDelegate {
     func showView()
     func reloadTableView()
+    func searchSongBar(_ textField: UITextField)
 }
 
 protocol AddSongTable {
@@ -18,34 +19,20 @@ protocol AddSongTable {
 
 class PlayListDetailModel : NSObject {
     var reloadDataDelegate : ReloadDataDelegate?
-    var songs = Set<Track>()
     var showViewDelegate : ShowViewDelegate?
     
 }
 extension PlayListDetailModel : AddSongTable {
     func addSongTable(_ song: Track) {
        songs.insert(song)
-//        print(song)
        songsArray = Array(songs)
        showViewDelegate?.reloadTableView()
     }
-    
-    
+
 }
 
 
-extension  PlayListDetailModel:  UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {        
-       let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
-        
-        cell.btnPlay.performTwoStateSelection()
-    }
-    
-    
-}
-
-extension PlayListDetailModel :  UITableViewDataSource {
+extension PlayListDetailModel :  UITableViewDataSource ,  UITableViewDelegate  {
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,7 +44,6 @@ extension PlayListDetailModel :  UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
         let elTrack = songsArray[indexPath.row]
-    //    print(elTrack)
         cell.setCancion(elTrack)
         cell.track = elTrack
         cell.parent = self
@@ -65,14 +51,26 @@ extension PlayListDetailModel :  UITableViewDataSource {
         cell.textLabel?.textColor = .white
         return cell
     }
-  
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            songs = songs.filter{ $0.song_id != songsArray[indexPath.row].song_id}
+            songsArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+        }
+       
+     
+    }
     
     
 }
 
 extension PlayListDetailModel : ButtonOnCellDelegate {
+    func textAlert(_ message: String) {
+        
+    }
+    
     func buttonTouchedOnCell(celda: UITableViewCell) {
-        print(celda)
         reloadDataDelegate?.changeView(celda)
     }
 }

@@ -1,0 +1,6 @@
+framework module Pods_Naranja_Music {
+  umbrella header "Pods-Naranja Music-umbrella.h"
+
+  export *
+  module * { export * }
+}

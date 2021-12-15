@@ -52,6 +52,28 @@ class TrackTableViewCell: UITableViewCell {
         return botonUno
     }()
     
+    var menuItems: [UIAction] {
+        return [
+            
+          
+            UIAction(title: "Play", image: UIImage(systemName: "play.fill"), handler: { (_) in
+                self.viewModel?.trackViewDelegate?.actionButton(self)
+                self.btnPlay.performTwoStateSelection()
+            }),
+            UIAction(title: "Download", image: UIImage(systemName: "tray.and.arrow.down.fill"), handler: { (_) in
+                self.parent?.textAlert("Descargando")
+                DownloadManager.shared.startDownload(URL(string: "https://speed.hetzner.de/100MB.bin")!)
+
+            }),
+            UIAction(title: "Eliminar de la playlist", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                self.parent?.textAlert("Elimando")
+            }),
+        ]
+    }
+    var demoMenu: UIMenu {
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -69,7 +91,7 @@ class TrackTableViewCell: UITableViewCell {
             icono.widthAnchor.constraint(equalTo: icono.heightAnchor)
         
         ])
-        addSubview(btnPlay)
+      addSubview(btnPlay)
         NSLayoutConstraint.activate([
             btnPlay.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             btnPlay.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
@@ -77,7 +99,7 @@ class TrackTableViewCell: UITableViewCell {
             btnPlay.widthAnchor.constraint(equalTo: btnPlay.heightAnchor),
 
         ])
-        btnPlay.addTarget(self, action: #selector(handleAction), for: .touchUpInside)
+      
         
 
          addSubview(titulo)
@@ -98,6 +120,9 @@ class TrackTableViewCell: UITableViewCell {
 
          ])
         
+        contentView.isUserInteractionEnabled = false
+        btnPlay.addTarget(self, action: #selector(handleAction), for: .touchUpInside)
+        
       
     }
     
@@ -105,9 +130,19 @@ class TrackTableViewCell: UITableViewCell {
         viewModel?.trackViewDelegate?.changeTextLabel(cancion)
     }
     
-    @objc func handleAction(_ sender: ButtonUIButton){
-        viewModel?.trackViewDelegate?.actionButton(sender)
+    @objc func handleAction(_ btn: ButtonUIButton){
+       
+        if #available(iOS 14.0, *) {
+            btn.menu = demoMenu
+            btn.showsMenuAsPrimaryAction = true
+         
+       } else {
+           viewModel?.trackViewDelegate?.actionButton(self)
+           btnPlay.performTwoStateSelection()
+       }
+        
     }
+        
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -4,7 +4,6 @@ import Foundation
 
 
 struct SongsList : Codable {
-    
     let songs : [Track]
 }
 
@@ -16,21 +15,21 @@ struct Track : Codable , Hashable{
     let song_id: String
     let title: String
     let artist: String?
-    let genre : generoMusicales?
-    let duration: Double?
+    let genre : String?
     let album : String?
     
    
 }
 
-enum generoMusicales: String, Codable {
-    case Rock = "Rock"
-    case vacio = ""
-}
+//enum generoMusicales: String, Codable {
+//    case Rock = "Rock"
+//    case vacio = ""
+//}
 
 
 var misTracks = [Track]()
 var songsArray = [Track]()
+var songs = Set<Track>()
 
 enum PlayerStates {
     case play

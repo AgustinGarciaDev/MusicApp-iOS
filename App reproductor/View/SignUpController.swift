@@ -43,9 +43,11 @@ class SignUpController: UIViewController {
         let mensaje = viewModel?.validateFields(userName: userName , passwordUser: userPassword)
         
         if mensaje != "Logueado" {
-            let alert = UIAlertController(title: "", message: mensaje , preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            self.alertModal(mensaje)
+            self.TextFieldPassword.errorAnimated()
+            self.TextFieldUserName.errorAnimated()
+
+
         }
         if mensaje == "Logueado"{
             goToWelcomeController()
