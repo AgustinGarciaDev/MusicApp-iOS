@@ -41,11 +41,6 @@ extension  AudioPlayerViewController: AudioPlayerProtocol {
                     self.present(ac, animated: true)
 
                 }),
-                UIAction(title: "download", image: UIImage(systemName: "tray.and.arrow.down.fill"), handler: { (_) in
-                    btnMenuOptions.download.descargarCancion()
-                    let message = "Estas por descargar \(self.infoSong!.title)"
-                    self.alertModal(message)
-                }),
                 UIAction(title: like, image: UIImage(systemName: "heart.fill"), handler: { (_ sender) in
                     self.view.addSubview(self.likeView)
                     self.like = "Unlove"

@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
-
 extension TracksTableViewController : ReloadDataDelegate , BtnStatus {
+  
+    
     func refreshTable() {
-        self.tableView.reloadData()
+        viewModel?.reloadDataDelegate?.reloadDataTable()
     }
     
     func audioPlayerDismissing() {
@@ -26,7 +26,7 @@ extension TracksTableViewController : ReloadDataDelegate , BtnStatus {
     }
     
     func reloadDataTable() {
-            self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     func changeView(_ celda: UITableViewCell) {
             let apvc = AudioPlayerViewController()
@@ -37,8 +37,8 @@ extension TracksTableViewController : ReloadDataDelegate , BtnStatus {
                 apvc.infoSong = elTrack
                 apvc.delegate = self
             }
-       // apvc.modalPresentationStyle = .fullScreen
             self.present(apvc, animated: true , completion: nil)
     }
        
 }
+

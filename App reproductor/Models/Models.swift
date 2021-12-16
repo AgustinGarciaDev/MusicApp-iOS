@@ -17,8 +17,7 @@ struct Track : Codable , Hashable{
     let artist: String?
     let genre : String?
     let album : String?
-    
-   
+    var downloading: Bool?
 }
 
 //enum generoMusicales: String, Codable {

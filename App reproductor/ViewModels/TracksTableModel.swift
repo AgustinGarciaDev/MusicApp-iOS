@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 protocol ReloadDataDelegate {
     func reloadDataTable()
@@ -21,9 +22,7 @@ class TracksTableModel : NSObject{
 
     func saveData(){
         guard let appDelegate  = UIApplication.shared.delegate as? AppDelegate else {return}
-        
         let context = appDelegate.managedObjectContext
-        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Track_")
         
         do{
@@ -42,7 +41,8 @@ class TracksTableModel : NSObject{
                                    title: title ?? "" ,
                                    artist: artist ?? "" ,
                                    genre: genre ?? "",
-                                   album: album ?? "" )
+                                  album: album ?? "" ,
+                                  downloading: false)
                 misTracks.append(track)
             }
         
@@ -62,7 +62,6 @@ class TracksTableModel : NSObject{
         
         RestServiceManager.shared.GoToInfo(responseType:  SongsList.self, method: .get, endpoint: "/db.json"){status , data in
             if let response = data?.songs {
-             //  misTracks = response
                 //Usamos coreData
                 if let _context = context {
                     //Eliminar contenido
@@ -74,8 +73,6 @@ class TracksTableModel : NSObject{
                     }catch{
                         print(error.localizedDescription)
                     }
-                    //Fin eliminar contenido
-                    //Agregar
                     
                     for item in response  {
                         guard let tracksEntity = NSEntityDescription.insertNewObject(forEntityName: "Track_", into: _context) as?  NSManagedObject else  {
@@ -86,6 +83,7 @@ class TracksTableModel : NSObject{
                         tracksEntity.setValue(item.genre, forKey: "genre")
                         tracksEntity.setValue(item.title, forKey: "title")
                         tracksEntity.setValue(item.artist, forKey: "artist")
+                        tracksEntity.setValue(item.downloading, forKey: "downloading")
 
                         do{
                             try _context.save()
@@ -108,10 +106,12 @@ class TracksTableModel : NSObject{
 
 
 extension TracksTableModel : UITableViewDelegate{
-    
+
 }
 
 extension TracksTableModel : UITableViewDataSource{
+    
+    
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return misTracks.count
@@ -123,18 +123,26 @@ extension TracksTableModel : UITableViewDataSource{
 
         let elTrack = misTracks[indexPath.row]
         cell.setCancion(elTrack)
+       
         cell.track = elTrack
         cell.parent = self
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
        
-
+        cell.cellDownloading = indexPath.row
+       
+       if elTrack.downloading == true {
+           cell.statusDownload.isHidden = false
+       }else{
+           cell.statusDownload.isHidden = true
+       }
         return cell
     }
     
 }
 
 extension TracksTableModel : ButtonOnCellDelegate {
+  
  
     func buttonTouchedOnCell(celda: UITableViewCell) {
         reloadDataDelegate?.changeView(celda)

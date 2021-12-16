@@ -27,9 +27,7 @@ extension TrackPickerModel : UIPickerViewDataSource{
 
 extension TrackPickerModel : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return misTracks[row].title
-
     }
 }
 

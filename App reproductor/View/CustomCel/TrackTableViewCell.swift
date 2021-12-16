@@ -10,8 +10,10 @@ import UIKit
 class TrackTableViewCell: UITableViewCell {
 
     var track:Track?
+    var cellDownloading : Int?
     var parent:ButtonOnCellDelegate?
     var viewModel : TrackViewCellModel?
+    var observer: Any!
     
     //Propiedades computadas
     var icono : UIImageView = {
@@ -52,37 +54,24 @@ class TrackTableViewCell: UITableViewCell {
         return botonUno
     }()
     
-    var menuItems: [UIAction] {
-        return [
-            
-          
-            UIAction(title: "Play", image: UIImage(systemName: "play.fill"), handler: { (_) in
-                self.viewModel?.trackViewDelegate?.actionButton(self)
-                self.btnPlay.performTwoStateSelection()
-            }),
-            UIAction(title: "Download", image: UIImage(systemName: "tray.and.arrow.down.fill"), handler: { (_) in
-                self.parent?.textAlert("Descargando")
-                DownloadManager.shared.startDownload(URL(string: "https://speed.hetzner.de/100MB.bin")!)
+    var statusDownload : UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.progressTintColor = .orange
+        progressView.trackTintColor = .gray
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        return progressView
+    }()
 
-            }),
-            UIAction(title: "Eliminar de la playlist", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
-                self.parent?.textAlert("Elimando")
-            }),
-        ]
-    }
-    var demoMenu: UIMenu {
-        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
    
         viewModel = TrackViewCellModel()
         viewModel?.trackViewDelegate = self
-       
+    
        addSubview(icono)
         NSLayoutConstraint.activate([
             icono.topAnchor.constraint(equalTo: topAnchor, constant: 5),
@@ -104,7 +93,7 @@ class TrackTableViewCell: UITableViewCell {
 
          addSubview(titulo)
          NSLayoutConstraint.activate([
-            titulo.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titulo.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             titulo.heightAnchor.constraint(equalToConstant: 35),
             titulo.leadingAnchor.constraint(equalTo: icono.trailingAnchor, constant: 5),
             titulo.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -5)
@@ -113,8 +102,8 @@ class TrackTableViewCell: UITableViewCell {
       
          addSubview(artista)
          NSLayoutConstraint.activate([
-            artista.heightAnchor.constraint(equalToConstant: 35),
-            artista.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            artista.heightAnchor.constraint(equalToConstant: 25),
+            artista.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             artista.leadingAnchor.constraint(equalTo: icono.trailingAnchor, constant: 5),
             artista.trailingAnchor.constraint(equalTo: btnPlay.leadingAnchor, constant: -5)
 
@@ -123,7 +112,14 @@ class TrackTableViewCell: UITableViewCell {
         contentView.isUserInteractionEnabled = false
         btnPlay.addTarget(self, action: #selector(handleAction), for: .touchUpInside)
         
-      
+        addSubview(statusDownload)
+       statusDownload.isHidden = true
+        NSLayoutConstraint.activate([
+            statusDownload.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            statusDownload.leadingAnchor.constraint(equalTo: icono.trailingAnchor, constant: 5),
+            statusDownload.heightAnchor.constraint(equalToConstant: 5),
+            statusDownload.widthAnchor.constraint(equalToConstant: 200),
+        ])
     }
     
     func setCancion (_ cancion: Track) {
@@ -132,8 +128,9 @@ class TrackTableViewCell: UITableViewCell {
     
     @objc func handleAction(_ btn: ButtonUIButton){
        
+        
         if #available(iOS 14.0, *) {
-            btn.menu = demoMenu
+            btn.menu = viewModel?.trackViewDelegate?.menuButton()
             btn.showsMenuAsPrimaryAction = true
          
        } else {
@@ -143,9 +140,10 @@ class TrackTableViewCell: UITableViewCell {
         
     }
         
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
 }
 

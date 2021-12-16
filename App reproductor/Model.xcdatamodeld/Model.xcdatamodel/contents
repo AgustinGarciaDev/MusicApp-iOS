@@ -3,11 +3,12 @@
     <entity name="Track_" representedClassName="Track_" syncable="YES" codeGenerationType="class">
         <attribute name="album" optional="YES" attributeType="String"/>
         <attribute name="artist" optional="YES" attributeType="String"/>
+        <attribute name="downloading" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="genre" optional="YES" attributeType="String"/>
         <attribute name="song_id" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Track_" positionX="-54" positionY="-9" width="128" height="104"/>
+        <element name="Track_" positionX="-54" positionY="-9" width="128" height="119"/>
     </elements>
 </model>

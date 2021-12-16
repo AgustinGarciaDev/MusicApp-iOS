@@ -11,7 +11,8 @@ import Foundation
 class DownloadManager : NSObject, ObservableObject{
     
     static var shared = DownloadManager()
-    
+
+    var celda : [String: TrackTableViewCell]?
     private var urlSession: URLSession!
 
     @Published var taks: [URLSessionTask] = []
@@ -45,7 +46,11 @@ extension DownloadManager  : URLSessionDelegate, URLSessionDownloadDelegate{
    
     
     func urlSession (_: URLSession, downloadTask: URLSessionDownloadTask, didWriteData _: Int64, totalBytesWritten _: Int64, totalBytesExpectedToWrite _: Int64){
-        print("progess\(downloadTask.progress.fractionCompleted)")
+        
+       let progress = downloadTask.progress.fractionCompleted
+        
+        
+        NotificationCenter.default.post(name: NSNotification.Name("updateTable"), object: progress , userInfo: celda)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {

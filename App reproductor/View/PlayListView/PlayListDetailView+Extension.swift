@@ -8,8 +8,8 @@
 import Foundation
 
 extension PlayListDetailController : ReloadDataDelegate , BtnStatus , ShowViewDelegate {
+
     func refreshTable() {
-        print("ejecuto")
         print(songsArray)
         listSongs.reloadData()
 

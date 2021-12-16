@@ -54,6 +54,8 @@
 		22D37651275D5A0100F32C2F /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D37650275D5A0100F32C2F /* LikeViewController.swift */; };
 		22D3CA45274D3F640075F2DE /* ButtonUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */; };
 		22DEE0D0276A3F67008797FF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE0CE276A3F67008797FF /* Model.xcdatamodeld */; };
+		22DEE0D3276A57AC008797FF /* WelcomeController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE0D2276A57AC008797FF /* WelcomeController+Extension.swift */; };
+		22DEE0D5276A582F008797FF /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE0D4276A582F008797FF /* WelcomeViewModel.swift */; };
 		22EC245A2767B82E00687248 /* RestServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC24592767B82D00687248 /* RestServiceManager.swift */; };
 		22FE09502724670100FF7274 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FE094F2724670100FF7274 /* SignUpController.swift */; };
 /* End PBXBuildFile section */
@@ -127,6 +129,8 @@
 		22D37650275D5A0100F32C2F /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		22D3CA44274D3F640075F2DE /* ButtonUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonUIButton.swift; sourceTree = "<group>"; };
 		22DEE0CF276A3F67008797FF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		22DEE0D2276A57AC008797FF /* WelcomeController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeController+Extension.swift"; sourceTree = "<group>"; };
+		22DEE0D4276A582F008797FF /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		22EC24592767B82D00687248 /* RestServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestServiceManager.swift; sourceTree = "<group>"; };
 		22FE094F2724670100FF7274 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		79C57CEDE401F39629E696EB /* Pods-Naranja Music.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Naranja Music.release.xcconfig"; path = "Target Support Files/Pods-Naranja Music/Pods-Naranja Music.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				224F059B2757098700F41C3C /* TrackPickerModel.swift */,
 				228737AE27579F6C00C67126 /* AudioPlayerModel.swift */,
 				228737B22757EE7900C67126 /* TrackViewCellModel.swift */,
+				22DEE0D4276A582F008797FF /* WelcomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 		224F05932756B09B00F41C3C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				22DEE0D1276A5786008797FF /* WelcomeController */,
 				22A51EBE275C033800CE3AE9 /* PlayListView */,
 				22A51EBB275C02FA00CE3AE9 /* TrackTableView */,
 				22A51EB8275C02B000CE3AE9 /* TrackPikerView */,
@@ -219,7 +225,6 @@
 				224F05942756B9C600F41C3C /* CustomCel */,
 				222D34FE27285EE3004CC6E8 /* SignInController.swift */,
 				228225AB272445A500CBC3E2 /* ViewController.swift */,
-				22C7156D272D75CD0061A64D /* WelcomeController.swift */,
 				22FE094F2724670100FF7274 /* SignUpController.swift */,
 			);
 			path = View;
@@ -333,7 +338,7 @@
 		22A51EB5275C01F500CE3AE9 /* AudioPlayerView */ = {
 			isa = PBXGroup;
 			children = (
-				22D3764F275D59C500F32C2F /* LiveViewController */,
+				22D3764F275D59C500F32C2F /* LikeViewController */,
 				226F7C57273567DC002D82DE /* AudioPlayerViewController.swift */,
 				22A51EB6275C021B00CE3AE9 /* AudioPlayerView+Extension.swift */,
 			);
@@ -367,12 +372,21 @@
 			path = PlayListView;
 			sourceTree = "<group>";
 		};
-		22D3764F275D59C500F32C2F /* LiveViewController */ = {
+		22D3764F275D59C500F32C2F /* LikeViewController */ = {
 			isa = PBXGroup;
 			children = (
 				22D37650275D5A0100F32C2F /* LikeViewController.swift */,
 			);
-			path = LiveViewController;
+			path = LikeViewController;
+			sourceTree = "<group>";
+		};
+		22DEE0D1276A5786008797FF /* WelcomeController */ = {
+			isa = PBXGroup;
+			children = (
+				22C7156D272D75CD0061A64D /* WelcomeController.swift */,
+				22DEE0D2276A57AC008797FF /* WelcomeController+Extension.swift */,
+			);
+			path = WelcomeController;
 			sourceTree = "<group>";
 		};
 		9E9C617C6A976DBDB555278A /* Pods */ = {
@@ -587,6 +601,7 @@
 				228737AF27579F6C00C67126 /* AudioPlayerModel.swift in Sources */,
 				22C7156E272D75CD0061A64D /* WelcomeController.swift in Sources */,
 				227D35322734353F0092658D /* Protocols.swift in Sources */,
+				22DEE0D3276A57AC008797FF /* WelcomeController+Extension.swift in Sources */,
 				224F0591275694CC00F41C3C /* SignInModel.swift in Sources */,
 				22DEE0D0276A3F67008797FF /* Model.xcdatamodeld in Sources */,
 				224B222C27470DD2006643D4 /* APIManager.swift in Sources */,
@@ -596,6 +611,7 @@
 				228225A8272445A500CBC3E2 /* AppDelegate.swift in Sources */,
 				22A51EBA275C02D600CE3AE9 /* TrackPickerView+Extension.swift in Sources */,
 				22D37651275D5A0100F32C2F /* LikeViewController.swift in Sources */,
+				22DEE0D5276A582F008797FF /* WelcomeViewModel.swift in Sources */,
 				228B31DC2762702C00E3300E /* DownloadManager.swift in Sources */,
 				22B027F527552B8E00852B28 /* PlayListDetailController.swift in Sources */,
 				228225AA272445A500CBC3E2 /* SceneDelegate.swift in Sources */,

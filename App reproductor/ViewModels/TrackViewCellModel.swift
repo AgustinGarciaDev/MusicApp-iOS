@@ -10,8 +10,8 @@ import Foundation
 protocol TrackViewCellProtocol {
     
     func changeTextLabel(_ cancion: Track)
-    func actionButton( _ celda : UITableViewCell) 
-    
+    func actionButton( _ celda : UITableViewCell)
+    func menuButton() -> UIMenu
 }
 
 protocol ButtonOnCellDelegate {
