@@ -30,15 +30,10 @@ class SignInModel {
             mensaje = "Password contiene menos de 10 caracteres"
         }else if passwordUser.isEmpty {
             mensaje = "Campo password vacio"
-        }
-      
-        print(userName)
-        print(passwordUser)
-        if(userOne.user == userName &&  userOne.password == passwordUser){
-            print("es igual")
-            mensaje = "Usuario Existente"
+        }else if(userOne.user == userName &&  userOne.password == passwordUser){
+                  mensaje = "Usuario Existente"
         }else{
-            mensaje = "Esta cuenta no existe"
+            mensaje = "Creando cuenta"
         }
     
         
