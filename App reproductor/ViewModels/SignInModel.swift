@@ -32,8 +32,13 @@ class SignInModel {
             mensaje = "Campo password vacio"
         }
       
+        print(userName)
+        print(passwordUser)
         if(userOne.user == userName &&  userOne.password == passwordUser){
+            print("es igual")
             mensaje = "Usuario Existente"
+        }else{
+            mensaje = "Esta cuenta no existe"
         }
     
         

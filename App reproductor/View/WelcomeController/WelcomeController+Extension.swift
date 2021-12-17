@@ -38,7 +38,7 @@ extension WelcomeController : WelcomeViewDelegate  {
     
     func handleTapAnimation() {
         
-        var  infoModal = InfoModal()
+        var infoModal = InfoModal()
         infoModal.changeValue()
     
         let message = "Copyright 2021 \n \(infoModal.name!) \n Version \(infoModal.version!) (\(infoModal.compilado!))"

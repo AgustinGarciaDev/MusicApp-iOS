@@ -45,9 +45,11 @@ class SignInController: UIViewController {
         if mensaje != "Logueado" && mensaje != "Usuario Existente" {
             self.textFieldUserName.errorAnimated()
             self.textFieldUserPasswork.errorAnimated()
+            print(mensaje)
             self.alertModal(mensaje)
         }
         if mensaje == "Usuario Existente"{
+            print(mensaje)
             goToWelcomeController()
         }
         
