@@ -1,6 +1,6 @@
 # Music App BEDU
 
-![Diseño sin título](https://user-images.githubusercontent.com/66225450/148703004-4fd9af9f-c139-456d-a643-606b081d141e.gif)
+![Diseño sin título](https://user-images.githubusercontent.com/66225450/148703004-4fd9af9f-c139-456d-a643-606b081d141e.gif =450x450)
 
 # Trabajo realizado
 
