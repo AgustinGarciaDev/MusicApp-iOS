@@ -60,6 +60,7 @@ class TracksTableModel : NSObject{
         
         let context = appDelegate.managedObjectContext
         
+        
         RestServiceManager.shared.GoToInfo(responseType:  SongsList.self, method: .get, endpoint: "/db.json"){status , data in
             if let response = data?.songs {
                 //Usamos coreData

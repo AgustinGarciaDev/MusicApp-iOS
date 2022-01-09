@@ -42,14 +42,14 @@ class SignUpController: UIViewController {
 
         let mensaje = viewModel?.validateFields(userName: userName , passwordUser: userPassword)
         
-        if mensaje != "Logueado"  || mensaje != "Creando cuenta" {
+        if mensaje != "Logueado" && mensaje != "Creando cuenta" {
             self.alertModal(mensaje)
             self.TextFieldPassword.errorAnimated()
             self.TextFieldUserName.errorAnimated()
 
 
         }
-        if mensaje == "Logueado" || mensaje == "Creando cuenta"{
+        if mensaje == "Creando cuenta"{
             goToWelcomeController()
         }
         

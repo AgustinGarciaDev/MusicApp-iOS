@@ -20,10 +20,6 @@ struct Track : Codable , Hashable{
     var downloading: Bool?
 }
 
-//enum generoMusicales: String, Codable {
-//    case Rock = "Rock"
-//    case vacio = ""
-//}
 
 
 var misTracks = [Track]()
